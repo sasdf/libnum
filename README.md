@@ -1,7 +1,9 @@
 libnum
 ====================
 
-**Requirements:** python2.7
+This is a python 3.7 version fork from [hellman's awesome libnum](https://github.com/hellman/libnum).
+
+**Requirements:** python 3
 
 This is a python library for some numbers functions:
 
@@ -68,12 +70,12 @@ warning: format of factorization is now dict like {p1: e1, p2: e2, ...}
 *   .generate(n) - n✕G
 *   .get\_order(p, limit) - slow method, trying to determine order of p; limit is max order to try
 
-<b>Converting</b>
+<b>Converting - Big endian</b>
 
-*  s2n(s) - packed string to number
-*  n2s(n) - number to packed string
-*  s2b(s) - packed string to binary string
-*  b2s(b) - binary string to packed string
+*  s2n(s) - packed string/bytes to number
+*  n2s(n) - number to packed bytes
+*  s2b(s) - packed string/bytes to binary string
+*  b2s(b) - binary string to packed bytes
 
 <b>Stuff</b>
 
@@ -86,5 +88,7 @@ About
 ---------------------
 
 Author: hellman ( hellman1908@gmail.com )
+
+Author - port to python3: sasdf
 
 License: MIT License (http://opensource.org/licenses/MIT)

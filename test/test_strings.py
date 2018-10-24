@@ -10,7 +10,8 @@ class StringsTest(unittest.TestCase):
         s = "long string to test"
         val = 2418187513319072758194084480823884981773628276
         self.assertEqual(s2n(s), val)
-        self.assertEqual(n2s(val), s)
+        self.assertEqual(s2n(s.encode('ascii')), val)
+        self.assertEqual(n2s(val), s.encode('ascii'))
         self.assertRaises(TypeError, s2n, 100)
         self.assertRaises(TypeError, n2s, "qwe")
 
@@ -19,7 +20,8 @@ class StringsTest(unittest.TestCase):
         bs = "01101010011101010111001101110100001000000111"
         bs += "00110111010001110010011010010110111001100111"
         self.assertEqual(s2b(s), bs)
-        self.assertEqual(b2s(bs), s)
+        self.assertEqual(s2b(s.encode('ascii')), bs)
+        self.assertEqual(b2s(bs), s.encode('ascii'))
         self.assertRaises(TypeError, s2b, 123)
         self.assertRaises(TypeError, b2s, 123)
         self.assertRaises(ValueError, b2s, "deadbeef")

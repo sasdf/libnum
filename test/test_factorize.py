@@ -4,6 +4,7 @@
 import unittest
 from libnum.factorize import factorize
 from libnum.factorize import is_power
+from functools import reduce
 
 
 class TestPower(unittest.TestCase):

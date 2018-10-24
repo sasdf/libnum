@@ -83,7 +83,7 @@ def sqrtmod_prime_power(a, p, k=1):
 
     powers = [1]
     pow_p = 1
-    for i in xrange(k):
+    for i in range(k):
         pow_p *= p
         powers.append(pow_p)
 
@@ -157,7 +157,7 @@ def sqrtmod_prime_power(a, p, k=1):
                 if b:
                     if b % powers[powind]:
                         raise ValueError("No square root for given value")
-                    b /= powers[powind]
+                    b //= powers[powind]
                     b %= powers[powind]
                     # Represent  t1 = t2 * p**powind + b
                     # Re-represent root: x = +- [ (r + p**powind * b)  +  t2 * p**(powind*2)  ]
@@ -170,7 +170,7 @@ def sqrtmod_prime_power(a, p, k=1):
     # x**2 == 0 (mod p**k),  p is prime
     def sqrt_for_zero(p, k):
         roots = [0]
-        start_k = (k / 2 + 1) if k & 1 else (k / 2)
+        start_k = (k // 2 + 1) if k & 1 else (k // 2)
 
         r = powers[start_k] % pow_p
         r0 = r

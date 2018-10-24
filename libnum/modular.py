@@ -1,9 +1,10 @@
 #-*- coding:utf-8 -*-
 
 import operator
+from functools import reduce
 
-from .common import *
-from .stuff import *
+from .common import gcd, xgcd
+from .stuff import factorial_get_prime_pow, factorial
 
 
 def has_invmod(a, modulus):
@@ -72,7 +73,7 @@ def nCk_mod(n, k, factors):
     mods = []
     for p, e in factors.items():
         rems.append(nCk_mod_prime_power(n, k, p, e))
-        mods.append(p ** e)
+        mods.append(p**e)
     return solve_crt(rems, mods)
 
 
@@ -83,7 +84,7 @@ def factorial_mod(n, factors):
     rems = []
     mods = []
     for p, e in factors.items():
-        pe = p ** e
+        pe = p**e
         if n >= pe or factorial_get_prime_pow(n, p) >= e:
             factmod = 0
         else:
@@ -110,18 +111,18 @@ def nCk_mod_prime_power(n, k, p, e):
         return res
 
     def nCk_get_non_prime_part(n, k, p, e):
-        pe = p ** e
+        pe = p**e
         r = n - k
 
         fact_pe = [1]
         acc = 1
-        for x in xrange(1, pe):
+        for x in range(1, pe):
             if x % p == 0:
                 x = 1
             acc = (acc * x) % pe
             fact_pe.append(acc)
 
-        top = bottom =1
+        top = bottom = 1
         is_negative = 0
         digits = 0
 
@@ -154,5 +155,5 @@ def nCk_mod_prime_power(n, k, p, e):
 
     modpow = e - prime_part_pow
 
-    r = nCk_get_non_prime_part(n, k, p, modpow) % (p ** modpow)
-    return ((p ** prime_part_pow) * r) % (p ** e)
+    r = nCk_get_non_prime_part(n, k, p, modpow) % (p**modpow)
+    return ((p**prime_part_pow) * r) % (p**e)

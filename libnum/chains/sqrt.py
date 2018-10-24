@@ -36,13 +36,13 @@ def sqrt_iter(n, s, t, a, b):
     s = floor(sqrt(n))
     return (v, next fraction params t, a, b)
     '''
-    v = t * (s + a) / b
+    v = t * (s + a) // b
     t2 = b
     b2 = t * (n - (b * v - a)**2)
     a2 = b * v - a
     g = gcd(t2, b2)
-    t2 /= g
-    b2 /= g
+    t2 //= g
+    b2 //= g
     return v, (t2, a2, b2)
 
 

@@ -1,5 +1,7 @@
 #-*- coding:utf-8 -*-
 
+import math
+from .common import len_in_bits
 
 def s2n(s):
     """
@@ -7,17 +9,17 @@ def s2n(s):
     """
     if not len(s):
         return 0
-    return int(s.encode("hex"), 16)
+    if isinstance(s, str):
+        s = s.encode('utf8')
+    return int.from_bytes(s, 'big')
 
 
 def n2s(n):
     """
     Number to string.
     """
-    s = hex(n)[2:].rstrip("L")
-    if len(s) % 2 != 0:
-        s = "0" + s
-    return s.decode("hex")
+    s = math.ceil(len_in_bits(n) / 8)
+    return n.to_bytes(s, 'big')
 
 
 def s2b(s):
@@ -25,8 +27,10 @@ def s2b(s):
     String to binary.
     """
     ret = []
+    if isinstance(s, str):
+        s = s.encode('utf8')
     for c in s:
-        ret.append(bin(ord(c))[2:].zfill(8))
+        ret.append(bin(c)[2:].zfill(8))
     return "".join(ret)
 
 
@@ -35,7 +39,9 @@ def b2s(b):
     Binary to string.
     """
     ret = []
-    b = b.zfill((len(b) + 7) / 8 * 8)
+    if not isinstance(b, str):
+        raise TypeError('Expected bin string')
+    b = b.zfill((len(b) + 7) // 8 * 8)
     for pos in range(0, len(b), 8):
-        ret.append(chr(int(b[pos:pos + 8], 2)))
-    return "".join(ret)
+        ret.append(int(b[pos:pos + 8], 2))
+    return bytes(ret)

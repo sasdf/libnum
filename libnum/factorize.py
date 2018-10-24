@@ -6,6 +6,8 @@ Some factorization methods are listed here
 
 import math
 import random
+from functools import reduce
+
 from .primes import primes, prime_test
 from .common import gcd, nroot
 
@@ -85,7 +87,7 @@ def factorize(n):
             # / it doesn't fasten factorize much
 
         divizor = _FUNC_REDUCE(n)
-        other = n / divizor
+        other = n // divizor
         factors.append(divizor)
         if other > 1:
             factors.append(other)
@@ -96,12 +98,12 @@ def factorize(n):
 
 
 def unfactorize(factors):
-    return reduce(lambda acc, (p, e): acc * (p**e), factors.items(), 1)
+    return reduce(lambda acc, pe: acc * (pe[0]**pe[1]), factors.items(), 1)
 
 
 def is_power(n):
     limit = int(math.log(n, 2))
-    for power in xrange(limit, 1, -1):
+    for power in range(limit, 1, -1):
         p = nroot(n, power)
         if pow(p, power) == n:
             return p, power

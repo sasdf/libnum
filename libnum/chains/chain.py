@@ -23,7 +23,7 @@ class Chain(object):
         r = []
         a, b = self.frac.numerator, self.frac.denominator
         while b != 1:
-            r.append(a / b)
+            r.append(a // b)
             a, b = b, a % b
         r.append(a)
         self._chain = r

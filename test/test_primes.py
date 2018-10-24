@@ -20,7 +20,7 @@ class PrimesTest(unittest.TestCase):
 
     def test_genprime(self):
         for size in (2, 10, 64, 128, 129, 256):
-            for ntry in xrange(10):
+            for ntry in range(10):
                 p = generate_prime(size, k=25)
                 self.assertEqual(len_in_bits(p), size)
 
@@ -33,7 +33,7 @@ class PrimesTest(unittest.TestCase):
         self.assertRaises(TypeError, generate_prime, "")
 
     def test_genprime_str(self):
-        begin = "preved medved \xde\xad\xbe\xef\x00\x00\x00\x00"
+        begin = b"preved medved \xde\xad\xbe\xef\x00\x00\x00\x00"
         n = generate_prime_from_string(begin)
         s = n2s(n)
         self.assertTrue(s.startswith(begin))

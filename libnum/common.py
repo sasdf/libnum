@@ -1,7 +1,7 @@
 #-*- coding:utf-8 -*-
 
-import math
 import random
+from functools import reduce
 
 
 def len_in_bits(n):
@@ -9,7 +9,7 @@ def len_in_bits(n):
     Return number of bits in binary representation of @n.
     """
     try:
-        return n.bit_length() # new in Python 2.7
+        return n.bit_length()  # new in Python 2.7
     except AttributeError:
         if n == 0:
             return 0
@@ -23,7 +23,7 @@ def randint_bits(size):
 
 
 def ceil(x, y):
-    return x / y + (x % y != 0)
+    return x // y + (x % y != 0)
 
 
 def nroot(x, n):
@@ -44,15 +44,15 @@ def nroot(x, n):
             raise ValueError("can't extract even root of negative")
 
     high = 1
-    while high ** n <= x:
+    while high**n <= x:
         high <<= 1
 
     low = high >> 1
     while low < high:
         mid = (low + high) >> 1
-        if low < mid and mid ** n < x:
+        if low < mid and mid**n < x:
             low = mid
-        elif high > mid and mid ** n > x:
+        elif high > mid and mid**n > x:
             high = mid
         else:
             return sign * mid

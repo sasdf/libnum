@@ -22,6 +22,13 @@ class CommonMath(unittest.TestCase):
 
         self.assertRaises(TypeError, len_in_bits, "qwe")
 
+    def test_ceil(self):
+        self.assertEqual(ceil(3585566078, 2570009223), 2)
+        self.assertEqual(ceil(3585566078, 257000923), 14)
+        self.assertEqual(ceil(2570009223, 3585566078), 1)
+        self.assertEqual(ceil(0, 3585566078), 0)
+        self.assertRaises(ZeroDivisionError, ceil, 257009223, 0)
+
     def test_nroot(self):
         for x in range(0, 100):
             for p in range(1, 3):
